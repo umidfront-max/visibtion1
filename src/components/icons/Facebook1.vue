@@ -1,6 +1,5 @@
 <style scoped>
 
-
 .facebook-btn {
 	background: #1877f2;
 	position: relative;
