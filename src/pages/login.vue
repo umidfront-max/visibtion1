@@ -122,7 +122,7 @@
 					<!-- Login button -->
 					<button
 						type="submit"
-						class="w-full flex items-center justify-center py-2 rounded-lg bg-purple-600 text-white font-semibold transition hover:bg-green-500"
+						class="w-full flex items-center justify-center py-3 rounded-lg bg-purple-600 text-white font-semibold transition hover:bg-green-500"
 					>
 						<span v-if="!loading">Login</span>
 						<div
