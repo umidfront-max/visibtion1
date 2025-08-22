@@ -11,7 +11,7 @@
 	text-decoration: none;
 	cursor: pointer;
 	border: 2px solid #f8f9fa;
-	border-radius: 35px;
+	border-radius: 8px;
 	outline: none;
 	overflow: hidden;
 	color: #f8f9fa;
@@ -117,7 +117,7 @@ h1 {
 	padding: 16px 32px;
 	font-size: 18px;
 	min-width: 200px;
-	border-radius: 12px;
+	border-radius: 8px;
 }
 
 .google-btn.large .google-icon {
@@ -126,7 +126,7 @@ h1 {
 }
 
 .google-btn.large::before {
-	border-radius: 12px;
+	border-radius: 8px;
 }
 
 /* Small version */
@@ -134,7 +134,7 @@ h1 {
 	padding: 8px 16px;
 	font-size: 14px;
 	min-width: 120px;
-	border-radius: 6px;
+	border-radius: 8px;
 }
 
 .google-btn.small .google-icon {
@@ -143,7 +143,7 @@ h1 {
 }
 
 .google-btn.small::before {
-	border-radius: 35px;
+	border-radius: 8px;
 }
 
 /* White version (official Google style) */

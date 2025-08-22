@@ -11,7 +11,7 @@
 	text-decoration: none;
 	cursor: pointer;
 	border: 2px solid #0077b5;
-	border-radius: 25px;
+	border-radius: 8px;
 	outline: none;
 	overflow: hidden;
 	color: #0077b5;
@@ -31,7 +31,7 @@
 	width: 0;
 	height: 0;
 	background: #0077b5;
-	border-radius: 25px;
+	border-radius: 8px;
 	transform: translate(-50%, -50%);
 	transition: all 0.4s ease-out;
 	z-index: -1;
@@ -95,7 +95,7 @@ h1 {
 	padding: 16px 32px;
 	font-size: 18px;
 	min-width: 200px;
-	border-radius: 35px;
+	border-radius: 8px;
 }
 
 .linkedin-btn.large .linkedin-icon {
@@ -104,7 +104,7 @@ h1 {
 }
 
 .linkedin-btn.large::before {
-	border-radius: 35px;
+	border-radius: 8px;
 }
 
 /* Small version */

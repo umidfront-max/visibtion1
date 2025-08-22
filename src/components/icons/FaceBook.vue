@@ -11,7 +11,7 @@
 	text-decoration: none;
 	cursor: pointer;
 	border: none;
-	border-radius: 35px;
+	border-radius: 8px;
 	outline: none;
 	overflow: hidden;
 	color: #ffffff;
@@ -31,7 +31,7 @@
 	width: 0;
 	height: 0;
 	background: #166fe5;
-	border-radius: 35px;
+	border-radius: 8px;
 	transform: translate(-50%, -50%);
 	transition: all 0.4s ease-out;
 	z-index: -1;
@@ -94,7 +94,7 @@ h1 {
 	padding: 16px 32px;
 	font-size: 18px;
 	min-width: 200px;
-	border-radius: 60px;
+	border-radius: 8px;
 }
 
 .facebook-btn.large .facebook-icon {
