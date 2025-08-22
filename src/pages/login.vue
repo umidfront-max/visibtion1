@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
-const imgSrc = ref(`/src/assets/img/logo-bg.svg?t=${Date.now()}`);
+const imgSrc = ref(`/logo-bg.svg?t=${Date.now()}`);
 const _formData = ref({
 	username: "",
 	password: "",
