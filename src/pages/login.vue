@@ -159,7 +159,7 @@ import { useRouter } from "vue-router";
 import Gmail from "@/components/icons/gmail.vue";
 import Password from "@/components/icons/password.vue";
 import LinkedIn from "@/components/icons/LinkedIn.vue";
-import Facebook1 from "@/components/icons/Facebook.vue";
+import Facebook1 from "@/components/icons/Facebook1.vue";
 import Google from "@/components/icons/Google.vue";
 const router = useRouter();
 const username = ref("");
