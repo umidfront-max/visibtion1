@@ -1,7 +1,7 @@
 <template>
 	<div class="min-h-screen flex flex-col bg-[#F5F5F5] text-gray-900">
 		<!-- Header -->
-	   <LayoutHeader />
+		<LayoutHeader />
 		<!-- Form -->
 		<div
 			class="flex-grow flex items-center flex-col justify-center px-4 mt-4"
@@ -11,12 +11,35 @@
 			>
 				<!-- Title -->
 				<div class="flex items-center gap-2 mb-6">
-					<img class="h-7" src="@/assets/img/log2.svg" alt="" />
-					<h2 class="text-2xl font-bold text-purple-600">Login</h2>
+					<img class="h-7" src="@/assets/img/avatar.svg" alt="avatar" />
+					<h2 class="text-2xl font-bold text-purple-600">
+						Create Account
+					</h2>
 				</div>
 
 				<!-- Form inputs -->
 				<form @submit.prevent="handleSubmit" class="space-y-4">
+					<!-- Email -->
+					<div class="relative w-full">
+						<Gmail class="absolute left-3 top-4 text-purple-500" />
+						<input
+							v-model="email"
+							id="email"
+							type="email"
+							placeholder=" "
+							class="peer block w-full rounded-lg border border-[#93c5fd] bg-[#eff3f5]/50 pl-10 pt-6 pb-2 text-sm text-gray-700 placeholder-transparent shadow-sm transition-all duration-300 focus:border-green-500 focus:bg-green-50 focus:ring-2 focus:ring-green-500 focus:outline-none"
+						/>
+						<label
+							for="email"
+							class="absolute left-10 top-1 text-purple-500 text-sm transition-all duration-200 peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:top-1 peer-focus:text-sm peer-focus:text-green-600"
+						>
+							Email
+						</label>
+						<p v-if="error && !email" class="text-red-500 text-xs mt-1">
+							Please enter email
+						</p>
+					</div>
+
 					<!-- Username -->
 					<div class="relative w-full">
 						<Gmail class="absolute left-3 top-4 text-purple-500" />
@@ -31,7 +54,7 @@
 							for="username"
 							class="absolute left-10 top-1 text-purple-500 text-sm transition-all duration-200 peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:top-1 peer-focus:text-sm peer-focus:text-green-600"
 						>
-							Username or Email
+							Username
 						</label>
 						<p
 							v-if="error && !username"
@@ -75,69 +98,48 @@
 						</p>
 					</div>
 
-					<!-- Remember + Forgot -->
-					<div class="flex items-center justify-between">
-						<label class="flex items-center gap-2 cursor-pointer">
-							<input type="checkbox" v-model="remember" class="hidden" />
-							<div
-								:class="[
-									'w-10 h-6 rounded-full p-1 transition',
-									remember ? 'bg-green-500' : 'bg-gray-300',
-								]"
-							>
-								<div
-									:class="[
-										'w-4 h-4 rounded-full shadow transform transition',
-										remember ? 'translate-x-4 bg-white' : 'bg-white',
-									]"
-								></div>
-							</div>
-							<span class="text-sm text-gray-600">Remember me</span>
-						</label>
-						<div class="group relative">
-							<router-link
-								to="/login"
-								class="!text-purple-600 !font-semibold hover:!text-green-500 active:!text-green-500 transition text-sm"
-							>
-								Forgot password?
-							</router-link>
-							<span
-								class="absolute left-0 bottom-0 h-[2px] w-0 bg-green-500 transition-all duration-300 group-hover:w-full group-active:w-full"
-							></span>
-						</div>
-					</div>
-
-					<!-- Login button -->
+					<!-- Continue button -->
 					<button
 						type="submit"
 						:class="loading && '!py-4'"
 						class="w-full h-12.5 flex items-center justify-center rounded-lg text-xl font-bold border border-purple-600 transition-all ease-in-out duration-500 hover:bg-green-500 active:bg-green-500 hover:border-green-500 active:border-green-500 hover:text-white active:text-white hover:cursor-pointer bg-purple-600 text-white"
 					>
-						<span v-if="!loading">Login</span>
+						<span v-if="!loading">CONTINUE</span>
 						<Loader v-else />
 					</button>
 
+					<!-- Or With -->
+					<div class="flex items-center my-4">
+						<hr class="flex-grow border-gray-300" />
+						<span class="mx-2 text-gray-500">Or With</span>
+						<hr class="flex-grow border-gray-300" />
+					</div>
+
 					<!-- Social login -->
-					<div class="flex flex-col gap-3 mt-4">
+					<div class="flex flex-col gap-3">
 						<Google />
 						<Facebook1 />
 						<LinkedIn />
 					</div>
-					<div class="flex justify-center items-center text-center">
-						<div class="relative group">
-							<router-link
-								to="/signup"
-								class="!text-purple-600 !font-extrabold active:!text-green-500 hover:!text-green-500 transition"
-							>
-								Sign Up
-							</router-link>
-							<span
-								class="absolute left-0 bottom-0 h-[2px] w-0 bg-green-500 transition-all duration-300 group-hover:w-full group-active:w-full"
-							></span>
-						</div>
-					</div>
+
+					<!-- Terms -->
+					<p class="text-xs text-gray-500 mt-4 text-center">
+						By signing up, you agree to our
+						<router-link
+							to="/terms"
+							class="!text-purple-600 hover:!text-green-500 transition"
+							>Terms of Service</router-link
+						>
+						and
+						<router-link
+							to="/privacy-policy"
+							class="!text-purple-600 hover:!text-green-500 transition"
+							>Privacy Policy</router-link
+						>.
+					</p>
 				</form>
 			</div>
+
 			<!-- Back to home -->
 			<router-link to="/" class="flex items-center gap-2 mt-4 mb-1 mx-auto">
 				<img src="@/assets/img/home1.svg" alt="home-icon" class="h-6" />
@@ -162,14 +164,14 @@ import Google from "@/components/icons/Google.vue";
 import Loader from "@/components/Loader.vue";
 import LayoutHeader from "../components/LayoutHeader.vue";
 const router = useRouter();
+const email = ref("");
 const username = ref("");
 const password = ref("");
-const remember = ref(false);
 const showPassword = ref(false);
 const loading = ref(false);
 const error = ref(false);
 
-// Theme toggle (faqat ikonka animatsiyasi uchun)
+// Theme toggle
 const storageKey = "theme-preference";
 const theme = ref(localStorage.getItem(storageKey) || "light");
 
@@ -182,14 +184,15 @@ function toggleTheme() {
 // Form submit
 const handleSubmit = () => {
 	error.value = false;
-	if (!username.value || !password.value) {
+	if (!email.value || !username.value || !password.value) {
 		error.value = true;
 		return;
 	}
 	loading.value = true;
 	setTimeout(() => {
 		loading.value = false;
-		router.push("/");
+		// Keyingi bosqich: emailga 6 xonali kod yuboriladi
+		router.push("/verify");
 	}, 1500);
 };
 </script>
@@ -203,6 +206,7 @@ const handleSubmit = () => {
 	color: #22c55e;
 }
 
+/* Quyosh-oy icon animatsiyasi login.vue bilan bir xil */
 .sun-and-moon > :is(.moon, .sun, .sun-beams) {
 	transform-origin: center;
 }
@@ -213,7 +217,6 @@ const handleSubmit = () => {
 	stroke: currentColor;
 	stroke-width: 2px;
 }
-
 [data-theme="dark"] .sun-and-moon > .sun {
 	transform: scale(1.75);
 }
@@ -227,38 +230,6 @@ const handleSubmit = () => {
 	[data-theme="dark"] .sun-and-moon > .moon > circle {
 		cx: 17;
 		transform: translateX(0);
-	}
-}
-
-/* Animatsiya */
-@media (prefers-reduced-motion: no-preference) {
-	.sun-and-moon > .sun {
-		transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-	}
-	.sun-and-moon > .sun-beams {
-		transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55),
-			opacity 0.5s ease;
-	}
-	.sun-and-moon .moon > circle {
-		transition: transform 0.25s cubic-bezier(0.19, 1, 0.22, 1);
-	}
-	@supports (cx: 1) {
-		.sun-and-moon .moon > circle {
-			transition: cx 0.25s cubic-bezier(0.19, 1, 0.22, 1);
-		}
-	}
-	[data-theme="dark"] .sun-and-moon > .sun {
-		transition-timing-function: ease;
-		transition-duration: 0.25s;
-		transform: scale(1.75);
-	}
-	[data-theme="dark"] .sun-and-moon > .sun-beams {
-		transition-duration: 0.15s;
-		transform: rotateZ(-25deg);
-	}
-	[data-theme="dark"] .sun-and-moon > .moon > circle {
-		transition-duration: 0.5s;
-		transition-delay: 0.25s;
 	}
 }
 </style>
