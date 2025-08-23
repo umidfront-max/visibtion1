@@ -1,22 +1,10 @@
 <template>
-	<div
-		class="min-h-screen flex flex-col transition-colors duration-300"
-		:class="
-			theme === 'dark'
-				? 'bg-black/70 text-white'
-				: 'bg-[#F5F5F5] text-gray-900'
-		"
-	>
+	<div class="min-h-screen flex flex-col bg-[#F5F5F5] text-gray-900">
 		<!-- Header -->
 		<header
-			class="w-full flex justify-between items-center px-6 py-3 shadow transition-colors duration-300"
-			:class="theme === 'dark' ? 'bg-black/30' : 'bg-white'"
+			class="w-full flex justify-between items-center px-6 py-3 shadow bg-white"
 		>
-			<img
-				src="../assets/img/logo.jpeg"
-				class="w-auto h-10 object-contain"
-			/>
-
+			<p class="text-purple-600 font-bold text-xl">LOGO</p>
 			<div class="flex items-center gap-4">
 				<!-- Theme toggle -->
 				<button
@@ -63,41 +51,33 @@
 					</svg>
 				</button>
 
-				<div>
-					<span
-						:class="theme === 'dark' ? 'text-gray-300' : 'text-gray-600'"
-					>
-						Don't have an account?
-					</span>
-					<router-link
-						to="/signup"
-						class="ml-2 text-purple-600 hover:text-green-500 hover:underline transition"
-					>
-						Sign up
-					</router-link>
+				<div class="flex items-center gap-2">
+					<span class="text-gray-600">Don't have an account?</span>
+					<div class="relative group">
+						<router-link
+							to="/login"
+							class="!text-purple-600 active:!text-green-500 hover:!text-green-500 transition"
+						>
+							Sign Up
+						</router-link>
+					</div>
 				</div>
 			</div>
 		</header>
 
-      
 		<!-- Form -->
 		<div class="flex-grow flex items-center flex-col justify-center px-4">
-         <!-- Back to home -->
-         <router-link to="/" class="flex items-center gap-2 my-4 mx-auto">
-            <img src="@/assets/img/home1.svg" alt="home-icon" class="h-6" />
-            <span
-               class="!text-purple-600 mt-1 font-medium transition-colors duration-300 hover:!text-green-500"
-            >
-               Back to Home
-            </span>
-         </router-link>
+			<!-- Back to home -->
+			<router-link to="/" class="flex items-center gap-2 my-4 mx-auto">
+				<img src="@/assets/img/home1.svg" alt="home-icon" class="h-6" />
+				<span
+					class="!text-purple-600 mt-1 font-medium transition-colors duration-300 hover:!text-green-500"
+				>
+					Back to Home
+				</span>
+			</router-link>
 			<div
-				class="rounded-2xl shadow-lg p-8 w-full max-w-md transition-colors duration-300"
-				:class="
-					theme === 'dark'
-						? 'bg-gray-300 text-white'
-						: 'bg-white text-gray-900'
-				"
+				class="rounded-2xl shadow-lg p-8 w-full max-w-md bg-white text-gray-900"
 			>
 				<!-- Title -->
 				<div class="flex items-center gap-2 mb-6">
@@ -116,11 +96,6 @@
 							type="text"
 							placeholder=" "
 							class="peer block w-full rounded-lg border border-[#93c5fd] bg-[#eff3f5]/50 pl-10 pt-6 pb-2 text-sm text-gray-700 placeholder-transparent shadow-sm transition-all duration-300 focus:border-green-500 focus:bg-green-50 focus:ring-2 focus:ring-green-500 focus:outline-none"
-							:class="
-								theme === 'dark'
-									? 'bg-gray-700 text-white border-gray-500'
-									: ''
-							"
 						/>
 						<label
 							for="username"
@@ -139,11 +114,6 @@
 							:type="showPassword ? 'text' : 'password'"
 							placeholder=" "
 							class="peer block w-full rounded-lg border border-[#93c5fd] bg-[#eff3f5]/50 pl-10 pr-10 pt-6 pb-2 text-sm text-gray-700 placeholder-transparent shadow-sm transition-all duration-300 focus:border-green-500 focus:bg-green-50 focus:ring-2 focus:ring-green-500 focus:outline-none"
-							:class="
-								theme === 'dark'
-									? 'bg-gray-700 text-white border-gray-500'
-									: ''
-							"
 						/>
 						<label
 							for="password"
@@ -156,9 +126,7 @@
 							@click="showPassword = !showPassword"
 						>
 							<i
-								:class="
-									showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'
-								"
+								:class="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"
 							></i>
 						</span>
 					</div>
@@ -170,29 +138,17 @@
 							<div
 								:class="[
 									'w-10 h-6 rounded-full p-1 transition',
-									remember
-										? 'bg-green-500'
-										: theme === 'dark'
-										? 'bg-gray-600'
-										: 'bg-gray-300',
+									remember ? 'bg-green-500' : 'bg-gray-300',
 								]"
 							>
 								<div
 									:class="[
 										'w-4 h-4 rounded-full shadow transform transition',
-										remember ? 'translate-x-4' : '',
-										theme === 'dark' ? 'bg-gray-200' : 'bg-white',
+										remember ? 'translate-x-4 bg-white' : 'bg-white',
 									]"
 								></div>
 							</div>
-							<span
-								class="text-sm"
-								:class="
-									theme === 'dark' ? 'text-black/80' : 'text-gray-600'
-								"
-							>
-								Remember me
-							</span>
+							<span class="text-sm text-gray-600">Remember me</span>
 						</label>
 						<div class="group relative">
 							<router-link
@@ -210,7 +166,7 @@
 					<!-- Login button -->
 					<button
 						type="submit"
-						:class="loading && '!py-2'"
+						:class="loading && '!py-4'"
 						class="w-full h-12.5 flex items-center justify-center rounded-lg text-xl font-bold border border-purple-600 transition-all ease-in-out duration-500 hover:bg-green-500 active:bg-green-500 hover:border-green-500 active:border-green-500 hover:text-white active:text-white hover:cursor-pointer bg-purple-600 text-white"
 					>
 						<span v-if="!loading">Login</span>
@@ -223,6 +179,19 @@
 						<Facebook1 />
 						<LinkedIn />
 					</div>
+					<div class="flex justify-center items-center text-center">
+						<div class="relative group">
+							<router-link
+								to="/login"
+								class="!text-purple-600 !font-extrabold active:!text-green-500 hover:!text-green-500 transition"
+							>
+								Sign Up
+							</router-link>
+							<span
+								class="absolute left-0 bottom-0 h-[2px] w-0 bg-green-500 transition-all duration-300 group-hover:w-full group-active:w-full"
+							></span>
+						</div>
+					</div>
 				</form>
 			</div>
 		</div>
@@ -230,7 +199,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref } from "vue";
 import { useRouter } from "vue-router";
 import Gmail from "@/components/icons/gmail.vue";
 import Password from "@/components/icons/password.vue";
@@ -247,37 +216,15 @@ const showPassword = ref(false);
 const loading = ref(false);
 const error = ref(false);
 
-// Theme logic
+// Theme toggle (faqat ikonka animatsiyasi uchun)
 const storageKey = "theme-preference";
-const theme = ref(getColorPreference());
-
-function getColorPreference() {
-	if (localStorage.getItem(storageKey))
-		return localStorage.getItem(storageKey);
-	return window.matchMedia("(prefers-color-scheme: dark)").matches
-		? "dark"
-		: "light";
-}
-
-function setPreference() {
-	localStorage.setItem(storageKey, theme.value);
-	document.documentElement.setAttribute("data-theme", theme.value);
-}
+const theme = ref(localStorage.getItem(storageKey) || "light");
 
 function toggleTheme() {
 	theme.value = theme.value === "light" ? "dark" : "light";
-	setPreference();
+	localStorage.setItem(storageKey, theme.value);
+	document.documentElement.setAttribute("data-theme", theme.value);
 }
-
-onMounted(() => {
-	setPreference();
-	window
-		.matchMedia("(prefers-color-scheme: dark)")
-		.addEventListener("change", ({ matches: isDark }) => {
-			theme.value = isDark ? "dark" : "light";
-			setPreference();
-		});
-});
 
 // Form submit
 const handleSubmit = () => {

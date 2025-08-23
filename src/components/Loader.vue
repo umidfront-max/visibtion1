@@ -1,7 +1,7 @@
 <style scoped>
   .loader {
     --color: #a5a5b0;
-    --size: 32px;
+    --size: 24px;
     width: var(--size);
     height: var(--size);
     display: grid;
