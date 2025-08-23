@@ -78,21 +78,19 @@
 				</div>
 			</div>
 		</header>
-		<div class="flex items-center gap-2 mt-4 mx-auto">
-			<!-- Gradient Icon -->
-			<img src="@/assets/img/home1.svg" alt="home-icon" class="w-6 h-6" />
 
-			<!-- Link -->
-			<router-link
-				to="/"
-				class="!text-purple-600 font-medium transition-colors duration-300 hover:!text-green-500"
-			>
-				Back to Home
-			</router-link>
-		</div>
-
+      
 		<!-- Form -->
-		<div class="flex-grow flex items-center justify-center px-4">
+		<div class="flex-grow flex items-center flex-col justify-center px-4">
+         <!-- Back to home -->
+         <router-link to="/" class="flex items-center gap-2 my-4 mx-auto">
+            <img src="@/assets/img/home1.svg" alt="home-icon" class="h-6" />
+            <span
+               class="!text-purple-600 mt-1 font-medium transition-colors duration-300 hover:!text-green-500"
+            >
+               Back to Home
+            </span>
+         </router-link>
 			<div
 				class="rounded-2xl shadow-lg p-8 w-full max-w-md transition-colors duration-300"
 				:class="
@@ -130,12 +128,6 @@
 						>
 							Username or Email
 						</label>
-						<p
-							v-if="error && !username"
-							class="text-red-500 text-xs mt-1"
-						>
-							Please enter username
-						</p>
 					</div>
 
 					<!-- Password -->
@@ -169,12 +161,6 @@
 								"
 							></i>
 						</span>
-						<p
-							v-if="error && !password"
-							class="text-red-500 text-xs mt-1"
-						>
-							Please enter password
-						</p>
 					</div>
 
 					<!-- Remember + Forgot -->
@@ -199,14 +185,14 @@
 									]"
 								></div>
 							</div>
-
 							<span
 								class="text-sm"
 								:class="
 									theme === 'dark' ? 'text-black/80' : 'text-gray-600'
 								"
-								>Remember me</span
 							>
+								Remember me
+							</span>
 						</label>
 						<div class="group relative">
 							<router-link
@@ -238,21 +224,6 @@
 						<LinkedIn />
 					</div>
 				</form>
-
-				<!-- Sign up bottom -->
-				<div class="flex justify-center items-center text-center">
-					<div class="relative group mt-4">
-						<router-link
-							to="/login"
-							class="!text-purple-600 !font-extrabold active:!text-green-500 hover:!text-green-500 transition"
-						>
-							Sign Up
-						</router-link>
-						<span
-							class="absolute left-0 bottom-0 h-[2px] w-0 bg-green-500 transition-all duration-300 group-hover:w-full group-active:w-full"
-						></span>
-					</div>
-				</div>
 			</div>
 		</div>
 	</div>
@@ -283,10 +254,9 @@ const theme = ref(getColorPreference());
 function getColorPreference() {
 	if (localStorage.getItem(storageKey))
 		return localStorage.getItem(storageKey);
-	else
-		return window.matchMedia("(prefers-color-scheme: dark)").matches
-			? "dark"
-			: "light";
+	return window.matchMedia("(prefers-color-scheme: dark)").matches
+		? "dark"
+		: "light";
 }
 
 function setPreference() {
@@ -322,22 +292,73 @@ const handleSubmit = () => {
 		router.push("/");
 	}, 1500);
 };
-
-const socialLogin = (provider) => {
-	loading.value = true;
-	setTimeout(() => {
-		loading.value = false;
-		router.push("/");
-	}, 1200);
-};
 </script>
 
 <style scoped>
 .theme-toggle {
-	color: #9333ea; /* purple default */
+	color: #9333ea;
 	transition: color 0.3s ease;
 }
 .theme-toggle:hover {
-	color: #22c55e; /* green hover */
+	color: #22c55e;
+}
+
+.sun-and-moon > :is(.moon, .sun, .sun-beams) {
+	transform-origin: center;
+}
+.sun-and-moon > :is(.moon, .sun) {
+	fill: currentColor;
+}
+.sun-and-moon > .sun-beams {
+	stroke: currentColor;
+	stroke-width: 2px;
+}
+
+[data-theme="dark"] .sun-and-moon > .sun {
+	transform: scale(1.75);
+}
+[data-theme="dark"] .sun-and-moon > .sun-beams {
+	opacity: 0;
+}
+[data-theme="dark"] .sun-and-moon > .moon > circle {
+	transform: translateX(-7px);
+}
+@supports (cx: 1) {
+	[data-theme="dark"] .sun-and-moon > .moon > circle {
+		cx: 17;
+		transform: translateX(0);
+	}
+}
+
+/* Animatsiya */
+@media (prefers-reduced-motion: no-preference) {
+	.sun-and-moon > .sun {
+		transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+	}
+	.sun-and-moon > .sun-beams {
+		transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55),
+			opacity 0.5s ease;
+	}
+	.sun-and-moon .moon > circle {
+		transition: transform 0.25s cubic-bezier(0.19, 1, 0.22, 1);
+	}
+	@supports (cx: 1) {
+		.sun-and-moon .moon > circle {
+			transition: cx 0.25s cubic-bezier(0.19, 1, 0.22, 1);
+		}
+	}
+	[data-theme="dark"] .sun-and-moon > .sun {
+		transition-timing-function: ease;
+		transition-duration: 0.25s;
+		transform: scale(1.75);
+	}
+	[data-theme="dark"] .sun-and-moon > .sun-beams {
+		transition-duration: 0.15s;
+		transform: rotateZ(-25deg);
+	}
+	[data-theme="dark"] .sun-and-moon > .moon > circle {
+		transition-duration: 0.5s;
+		transition-delay: 0.25s;
+	}
 }
 </style>
