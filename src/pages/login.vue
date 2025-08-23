@@ -68,7 +68,9 @@
 		</header>
 
 		<!-- Form -->
-		<div class="flex-grow flex items-center flex-col justify-center px-4 mt-4">
+		<div
+			class="flex-grow flex items-center flex-col justify-center px-4 mt-4"
+		>
 			<div
 				class="rounded-2xl shadow-lg p-8 w-full max-w-md bg-white text-gray-900"
 			>
@@ -96,6 +98,12 @@
 						>
 							Username or Email
 						</label>
+						<p
+							v-if="error && !username"
+							class="text-red-500 text-xs mt-1"
+						>
+							Please enter username
+						</p>
 					</div>
 
 					<!-- Password -->
@@ -124,6 +132,12 @@
 								"
 							></i>
 						</span>
+						<p
+							v-if="error && !password"
+							class="text-red-500 text-xs mt-1"
+						>
+							Please enter password
+						</p>
 					</div>
 
 					<!-- Remember + Forgot -->
