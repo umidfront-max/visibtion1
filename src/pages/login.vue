@@ -4,7 +4,9 @@
 		<header
 			class="w-full flex justify-between items-center px-6 py-3 shadow bg-white"
 		>
-			<p class="text-purple-600 font-bold text-xl">LOGO</p>
+			<router-link to="/" class="!text-purple-600 font-bold text-xl"
+				>LOGO</router-link
+			>
 			<div class="flex items-center gap-4">
 				<!-- Theme toggle -->
 				<button
@@ -66,16 +68,7 @@
 		</header>
 
 		<!-- Form -->
-		<div class="flex-grow flex items-center flex-col justify-center px-4">
-			<!-- Back to home -->
-			<router-link to="/" class="flex items-center gap-2 my-4 mx-auto">
-				<img src="@/assets/img/home1.svg" alt="home-icon" class="h-6" />
-				<span
-					class="!text-purple-600 mt-1 font-medium transition-colors duration-300 hover:!text-green-500"
-				>
-					Back to Home
-				</span>
-			</router-link>
+		<div class="flex-grow flex items-center flex-col justify-center px-4 mt-4">
 			<div
 				class="rounded-2xl shadow-lg p-8 w-full max-w-md bg-white text-gray-900"
 			>
@@ -126,7 +119,9 @@
 							@click="showPassword = !showPassword"
 						>
 							<i
-								:class="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"
+								:class="
+									showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'
+								"
 							></i>
 						</span>
 					</div>
@@ -194,6 +189,15 @@
 					</div>
 				</form>
 			</div>
+			<!-- Back to home -->
+			<router-link to="/" class="flex items-center gap-2 mt-4 mb-1 mx-auto">
+				<img src="@/assets/img/home1.svg" alt="home-icon" class="h-6" />
+				<span
+					class="!text-purple-600 mt-1 font-medium transition-colors duration-300 hover:!text-green-500"
+				>
+					Back to Home
+				</span>
+			</router-link>
 		</div>
 	</div>
 </template>
