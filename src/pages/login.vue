@@ -1,33 +1,109 @@
 <template>
-	<div class="min-h-screen bg-[#F5F5F5] flex flex-col">
+	<div
+		class="min-h-screen flex flex-col transition-colors duration-300"
+		:class="
+			theme === 'dark'
+				? 'bg-black/70 text-white'
+				: 'bg-[#F5F5F5] text-gray-900'
+		"
+	>
 		<!-- Header -->
 		<header
-			class="w-full flex justify-between items-center px-6 py-4 bg-white shadow"
+			class="w-full flex justify-between items-center px-6 py-3 shadow transition-colors duration-300"
+			:class="theme === 'dark' ? 'bg-black/30' : 'bg-white'"
 		>
-			<div class="font-bold text-xl text-purple-600">LOGO</div>
-			<div>
-				<span class="text-gray-600">Don't have an account?</span>
-				<router-link
-					to="/signup"
-					class="ml-2 text-purple-600 hover:text-green-500 hover:underline transition"
+			<img
+				src="../assets/img/logo.jpeg"
+				class="w-auto h-10 object-contain"
+			/>
+
+			<div class="flex items-center gap-4">
+				<!-- Theme toggle -->
+				<button
+					id="theme-toggle"
+					class="theme-toggle p-2 rounded-full transition"
+					@click="toggleTheme"
+					:aria-label="theme"
 				>
-					Sign up
-				</router-link>
+					<svg
+						class="sun-and-moon"
+						aria-hidden="true"
+						width="24"
+						height="24"
+						viewBox="0 0 24 24"
+					>
+						<mask class="moon" id="moon-mask">
+							<rect
+								x="0"
+								y="0"
+								width="100%"
+								height="100%"
+								fill="white"
+							/>
+							<circle cx="24" cy="10" r="6" fill="black" />
+						</mask>
+						<circle
+							class="sun"
+							cx="12"
+							cy="12"
+							r="6"
+							mask="url(#moon-mask)"
+							fill="currentColor"
+						/>
+						<g class="sun-beams" stroke="currentColor">
+							<line x1="12" y1="1" x2="12" y2="3" />
+							<line x1="12" y1="21" x2="12" y2="23" />
+							<line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+							<line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+							<line x1="1" y1="12" x2="3" y2="12" />
+							<line x1="21" y1="12" x2="23" y2="12" />
+							<line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+							<line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+						</g>
+					</svg>
+				</button>
+
+				<div>
+					<span
+						:class="theme === 'dark' ? 'text-gray-300' : 'text-gray-600'"
+					>
+						Don't have an account?
+					</span>
+					<router-link
+						to="/signup"
+						class="ml-2 text-purple-600 hover:text-green-500 hover:underline transition"
+					>
+						Sign up
+					</router-link>
+				</div>
 			</div>
 		</header>
+		<div class="flex items-center gap-2 mt-4 mx-auto">
+			<!-- Gradient Icon -->
+			<img src="@/assets/img/home1.svg" alt="home-icon" class="w-6 h-6" />
+
+			<!-- Link -->
+			<router-link
+				to="/"
+				class="!text-purple-600 font-medium transition-colors duration-300 hover:!text-green-500"
+			>
+				Back to Home
+			</router-link>
+		</div>
 
 		<!-- Form -->
 		<div class="flex-grow flex items-center justify-center px-4">
-			<div class="bg-white rounded-2xl shadow-lg p-8 w-full max-w-md">
+			<div
+				class="rounded-2xl shadow-lg p-8 w-full max-w-md transition-colors duration-300"
+				:class="
+					theme === 'dark'
+						? 'bg-gray-300 text-white'
+						: 'bg-white text-gray-900'
+				"
+			>
 				<!-- Title -->
 				<div class="flex items-center gap-2 mb-6">
-					<!-- <lord-icon
-						src="https://cdn.lordicon.com/dxjqoygy.json"
-						trigger="loop"
-						colors="primary:#6a0dad,secondary:#00c853"
-						style="width: 40px; height: 40px"
-					/> -->
-					<img class="h-7" src="@/assets/img/logins.svg" alt="" />
+					<img class="h-7" src="@/assets/img/log2.svg" alt="" />
 					<h2 class="text-2xl font-bold text-purple-600">Login</h2>
 				</div>
 
@@ -35,15 +111,18 @@
 				<form @submit.prevent="handleSubmit" class="space-y-4">
 					<!-- Username -->
 					<div class="relative w-full">
-						<!-- <span class="absolute left-3 top-4 text-purple-500"> -->
 						<Gmail class="absolute left-3 top-4 text-purple-500" />
-						<!-- </span> -->
 						<input
 							v-model="username"
 							id="username"
 							type="text"
 							placeholder=" "
 							class="peer block w-full rounded-lg border border-[#93c5fd] bg-[#eff3f5]/50 pl-10 pt-6 pb-2 text-sm text-gray-700 placeholder-transparent shadow-sm transition-all duration-300 focus:border-green-500 focus:bg-green-50 focus:ring-2 focus:ring-green-500 focus:outline-none"
+							:class="
+								theme === 'dark'
+									? 'bg-gray-700 text-white border-gray-500'
+									: ''
+							"
 						/>
 						<label
 							for="username"
@@ -64,11 +143,18 @@
 						<Password class="absolute left-3 top-4 text-purple-500" />
 						<input
 							v-model="password"
+							id="password"
 							:type="showPassword ? 'text' : 'password'"
 							placeholder=" "
 							class="peer block w-full rounded-lg border border-[#93c5fd] bg-[#eff3f5]/50 pl-10 pr-10 pt-6 pb-2 text-sm text-gray-700 placeholder-transparent shadow-sm transition-all duration-300 focus:border-green-500 focus:bg-green-50 focus:ring-2 focus:ring-green-500 focus:outline-none"
+							:class="
+								theme === 'dark'
+									? 'bg-gray-700 text-white border-gray-500'
+									: ''
+							"
 						/>
 						<label
+							for="password"
 							class="absolute left-10 top-1 text-gray-500 text-sm transition-all duration-200 peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:top-1 peer-focus:text-sm peer-focus:text-green-600"
 						>
 							Password
@@ -98,55 +184,74 @@
 							<div
 								:class="[
 									'w-10 h-6 rounded-full p-1 transition',
-									remember ? 'bg-green-500' : 'bg-gray-300',
+									remember
+										? 'bg-green-500'
+										: theme === 'dark'
+										? 'bg-gray-600'
+										: 'bg-gray-300',
 								]"
 							>
 								<div
 									:class="[
-										'w-4 h-4 bg-white rounded-full shadow transform transition',
+										'w-4 h-4 rounded-full shadow transform transition',
 										remember ? 'translate-x-4' : '',
+										theme === 'dark' ? 'bg-gray-200' : 'bg-white',
 									]"
 								></div>
 							</div>
-							<span class="text-sm text-gray-600">Remember me</span>
-						</label>
 
-						<router-link
-							to="/login"
-							class="!text-purple-600 !font-semibold hover:!text-green-500 active:!text-green-500 active:!underline hover:!underline transition text-sm"
-						>
-							Forgot password?
-						</router-link>
+							<span
+								class="text-sm"
+								:class="
+									theme === 'dark' ? 'text-black/80' : 'text-gray-600'
+								"
+								>Remember me</span
+							>
+						</label>
+						<div class="group relative">
+							<router-link
+								to="/login"
+								class="!text-purple-600 !font-semibold hover:!text-green-500 active:!text-green-500 transition text-sm"
+							>
+								Forgot password?
+							</router-link>
+							<span
+								class="absolute left-0 bottom-0 h-[2px] w-0 bg-green-500 transition-all duration-300 group-hover:w-full group-active:w-full"
+							></span>
+						</div>
 					</div>
 
 					<!-- Login button -->
 					<button
 						type="submit"
-						class="w-full flex items-center justify-center py-3 rounded-lg bg-purple-600 text-white font-semibold transition hover:bg-green-500"
+						:class="loading && '!py-2'"
+						class="w-full h-12.5 flex items-center justify-center rounded-lg text-xl font-bold border border-purple-600 transition-all ease-in-out duration-500 hover:bg-green-500 active:bg-green-500 hover:border-green-500 active:border-green-500 hover:text-white active:text-white hover:cursor-pointer bg-purple-600 text-white"
 					>
 						<span v-if="!loading">Login</span>
-						<div
-							v-else
-							class="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"
-						></div>
+						<Loader v-else />
 					</button>
 
 					<!-- Social login -->
 					<div class="flex flex-col gap-3 mt-4">
 						<Google />
-						<LinkedIn />
 						<Facebook1 />
+						<LinkedIn />
 					</div>
 				</form>
 
 				<!-- Sign up bottom -->
-				<div class="text-center mt-4">
-					<router-link
-						to="/login"
-						class="!text-purple-600 !font-extrabold active:!underline hover:!underline active:!text-green-500 hover:!text-green-500 transition"
-					>
-						Sign Up
-					</router-link>
+				<div class="flex justify-center items-center text-center">
+					<div class="relative group mt-4">
+						<router-link
+							to="/login"
+							class="!text-purple-600 !font-extrabold active:!text-green-500 hover:!text-green-500 transition"
+						>
+							Sign Up
+						</router-link>
+						<span
+							class="absolute left-0 bottom-0 h-[2px] w-0 bg-green-500 transition-all duration-300 group-hover:w-full group-active:w-full"
+						></span>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -154,13 +259,15 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import Gmail from "@/components/icons/gmail.vue";
 import Password from "@/components/icons/password.vue";
 import LinkedIn from "@/components/icons/LinkedIn.vue";
 import Facebook1 from "@/components/icons/Facebook1.vue";
 import Google from "@/components/icons/Google.vue";
+import Loader from "@/components/Loader.vue";
+
 const router = useRouter();
 const username = ref("");
 const password = ref("");
@@ -169,6 +276,40 @@ const showPassword = ref(false);
 const loading = ref(false);
 const error = ref(false);
 
+// Theme logic
+const storageKey = "theme-preference";
+const theme = ref(getColorPreference());
+
+function getColorPreference() {
+	if (localStorage.getItem(storageKey))
+		return localStorage.getItem(storageKey);
+	else
+		return window.matchMedia("(prefers-color-scheme: dark)").matches
+			? "dark"
+			: "light";
+}
+
+function setPreference() {
+	localStorage.setItem(storageKey, theme.value);
+	document.documentElement.setAttribute("data-theme", theme.value);
+}
+
+function toggleTheme() {
+	theme.value = theme.value === "light" ? "dark" : "light";
+	setPreference();
+}
+
+onMounted(() => {
+	setPreference();
+	window
+		.matchMedia("(prefers-color-scheme: dark)")
+		.addEventListener("change", ({ matches: isDark }) => {
+			theme.value = isDark ? "dark" : "light";
+			setPreference();
+		});
+});
+
+// Form submit
 const handleSubmit = () => {
 	error.value = false;
 	if (!username.value || !password.value) {
@@ -192,65 +333,11 @@ const socialLogin = (provider) => {
 </script>
 
 <style scoped>
-.social-btn {
-	position: relative;
-	padding: 10px 15px;
-	border-radius: 25px;
-	font-weight: 600;
-	border: 1px solid;
-	overflow: hidden;
-	cursor: pointer;
-	transition: color 0.3s ease-out;
-	background: transparent;
+.theme-toggle {
+	color: #9333ea; /* purple default */
+	transition: color 0.3s ease;
 }
-
-.social-btn::before {
-	content: "";
-	position: absolute;
-	inset: 0;
-	margin: auto;
-	border-radius: 50%;
-	display: block;
-	width: 20em;
-	height: 20em;
-	left: -5em;
-	transition: box-shadow 0.5s ease-out;
-	z-index: -1;
-}
-
-/* GOOGLE */
-.social-btn.google {
-	color: #db4437;
-	border-color: #db4437;
-}
-.social-btn.google:hover {
-	color: #fff;
-}
-.social-btn.google:hover::before {
-	box-shadow: inset 0 0 0 10em #db4437;
-}
-
-/* FACEBOOK */
-.social-btn.facebook {
-	color: #1877f2;
-	border-color: #1877f2;
-}
-.social-btn.facebook:hover {
-	color: #fff;
-}
-.social-btn.facebook:hover::before {
-	box-shadow: inset 0 0 0 10em #1877f2;
-}
-
-/* LINKEDIN */
-.social-btn.linkedin {
-	color: #0077b5;
-	border-color: #0077b5;
-}
-.social-btn.linkedin:hover {
-	color: #fff;
-}
-.social-btn.linkedin:hover::before {
-	box-shadow: inset 0 0 0 10em #0077b5;
+.theme-toggle:hover {
+	color: #22c55e; /* green hover */
 }
 </style>
