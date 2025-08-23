@@ -96,7 +96,7 @@
 						</label>
 						<div class="group relative">
 							<router-link
-								to="/login"
+								to="/forgot"
 								class="!text-purple-600 !font-semibold hover:!text-green-500 active:!text-green-500 transition text-sm"
 							>
 								Forgot password?

@@ -21,6 +21,21 @@ const routes = [
       name: "verify",
       component: () => import("@/pages/verify.vue")
    },
+   {
+      path: "/forgot",
+      name: "forgot",
+      component: () => import("@/pages/forgot.vue")
+   },
+   {
+      path: "/terms",
+      name: "terms",
+      component: () => import("@/pages/terms.vue")
+   },
+   {
+      path: "/privacy-policy",
+      name: "privacyPolicy",
+      component: () => import("@/pages/privacyPolicy.vue")
+   },
 ];
 
 const router = createRouter({
