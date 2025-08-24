@@ -57,7 +57,12 @@ watch(
 	<div
 		class="w-full rounded navbar transition-transform duration-300 ease-in-out flex items-center justify-between pl-8 pr-2.5 h-17.5 max-lg:pl-2.5 max-lg:h-15 max-md:fixed left-0 top-0 max-md:py-10"
 	>
-		<img src="../assets/img/logo.jpeg" class="w-auto h-14 object-contain" />
+		<router-link to="/">
+			<img
+				src="../assets/img/logo.jpeg"
+				class="w-auto h-14 object-contain"
+			/>
+		</router-link>
 
 		<ul class="flex items-center gap-11 max-lg:hidden">
 			<li
