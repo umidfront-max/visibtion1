@@ -15,7 +15,7 @@ import Foot from "@/components/Foot.vue";
 			aria-label="Terms and Conditions header"
 		>
 			<div
-				class="hero-gradient py-24 md:py-36"
+				class="hero-gradient pt-32 pb-10 md:py-36"
 				role="img"
 				aria-label="Animated gradient background"
 			>
@@ -34,7 +34,7 @@ import Foot from "@/components/Foot.vue";
 					<section class="max-w-3xl mx-auto space-y-4 leading-relaxed">
 						<!-- Accounts -->
 						<section>
-							<h2 class="text-xl md:text-2xl font-semibold mb-3">
+							<h2 class="text-xl md:text-2xl max-md:mt-6 font-semibold mb-3">
 								Accounts
 							</h2>
 							<p class="font-bold !mb-3">

@@ -44,8 +44,8 @@
 					</g>
 				</svg>
 			</button>
-    
-			<div v-if="route.path == '/login' " class="flex items-center gap-2">
+
+			<div v-if="route.path == '/login'" class="flex items-center gap-2">
 				<span class="text-gray-600">Don't have an account?</span>
 				<div class="relative group">
 					<router-link
@@ -75,8 +75,9 @@ import { ref } from "vue";
 import { useRoute } from "vue-router";
 
 const storageKey = "theme-preference";
-const theme = ref(localStorage.getItem(storageKey) || "light");
-const route = useRoute()
+// localStorage.getItem(storageKey) || 
+const theme = ref("light");
+const route = useRoute();
 function toggleTheme() {
 	theme.value = theme.value === "light" ? "dark" : "light";
 	localStorage.setItem(storageKey, theme.value);
@@ -93,26 +94,38 @@ function toggleTheme() {
 	color: #22c55e;
 }
 
-/* Quyosh-oy icon animatsiyasi login.vue bilan bir xil */
 .sun-and-moon > :is(.moon, .sun, .sun-beams) {
 	transform-origin: center;
+	transition: all 0.6s ease-in-out; /* qo'shildi */
 }
+
 .sun-and-moon > :is(.moon, .sun) {
 	fill: currentColor;
+	transition: transform 0.6s ease-in-out, fill 0.6s ease-in-out;
 }
+
 .sun-and-moon > .sun-beams {
 	stroke: currentColor;
 	stroke-width: 2px;
+	transition: opacity 0.6s ease-in-out;
 }
+
 [data-theme="dark"] .sun-and-moon > .sun {
 	transform: scale(1.75);
 }
+
 [data-theme="dark"] .sun-and-moon > .sun-beams {
 	opacity: 0;
 }
+
+.sun-and-moon > .moon > circle {
+	transition: transform 0.6s ease-in-out, cx 0.6s ease-in-out;
+}
+
 [data-theme="dark"] .sun-and-moon > .moon > circle {
 	transform: translateX(-7px);
 }
+
 @supports (cx: 1) {
 	[data-theme="dark"] .sun-and-moon > .moon > circle {
 		cx: 17;

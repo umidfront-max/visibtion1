@@ -8,7 +8,7 @@
 			<div class="rounded-2xl shadow-lg p-8 w-full max-w-md bg-white text-gray-900">
 				<!-- Title -->
 				<div class="flex items-center gap-2 mb-6">
-					<img class="h-7" src="@/assets/img/log2.svg" alt="logo" />
+					<img class="h-8" src="@/assets/img/refresh.svg" alt="logo" />
 					<h2 class="text-2xl font-bold text-purple-600">Forgot password</h2>
 				</div>
 

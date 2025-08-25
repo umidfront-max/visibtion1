@@ -15,7 +15,7 @@ import Foot from "@/components/Foot.vue";
 			aria-label="Terms and Conditions header"
 		>
 			<div
-				class="hero-gradient py-24 md:py-36"
+				class="hero-gradient pt-32 pb-10 md:py-36"
 				role="img"
 				aria-label="Animated gradient background"
 			>
@@ -31,7 +31,7 @@ import Foot from "@/components/Foot.vue";
 			<!-- Limited rights to use -->
 			<main class="flex-1">
 				<div class="container mx-auto px-4 py-6 md:py-12">
-					<section class="max-w-3xl mx-auto space-y-4 leading-relaxed">
+					<section class="max-w-3xl mx-auto space-y-4 mt-6 leading-relaxed">
 						<!-- Accounts -->
 						<p>
 							We wrote this policy to help you understand what

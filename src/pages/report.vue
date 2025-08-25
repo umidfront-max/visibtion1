@@ -42,15 +42,29 @@ const handleSubmit = () => {
 				<Navbar />
 			</div>
 		</div>
+		<header class="relative overflow-hidden" aria-label="Help header">
+			<div
+				class="hero-gradient pt-32 pb-8 md:py-24 md:pb-6 flex flex-col items-center justify-center"
+				role="img"
+				aria-label="Animated gradient background"
+			>
+				<h1
+					class="text-3xl text-center md:text-5xl font-bold leading-tight text-white drop-shadow-sm mb-6"
+				>
+					Report
+				</h1>
+
+			</div>
+		</header>
 		<div
-			class="flex-grow flex items-center flex-col justify-center px-4 my-24 mt-32"
+			class="flex-grow flex items-center flex-col justify-center px-4 my-12"
 		>
 			<div
 				class="rounded-2xl shadow-lg p-8 w-full max-w-md bg-white text-gray-900"
 			>
 				<!-- Title -->
 				<div class="flex items-center gap-2 mb-6">
-					<img class="h-7" src="@/assets/img/log2.svg" alt="" />
+					<img class="h-7" src="@/assets/img/rep.svg" alt="" />
 					<h2 class="text-2xl font-bold text-purple-600">
 						Report a Violation
 					</h2>
@@ -61,8 +75,8 @@ const handleSubmit = () => {
 					think we should review. You can view our
 					<router-link
 						to="/terms"
-						class="text-purple-600 hover:text-green-500 font-semibold"
-						>Terms of Service</router-link
+						class="!text-purple-600 hover:!text-green-500 font-semibold"
+						>Terms of Use</router-link
 					>.
 				</p>
 
@@ -153,7 +167,7 @@ const handleSubmit = () => {
 						>
 							Type of Report *
 						</label>
-					
+
 						<!-- Custom dropdown arrow -->
 						<div
 							class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3"
