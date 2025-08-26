@@ -60,7 +60,7 @@ const helpLinks = ref([
 				</h1>
 
 				<!-- Search input -->
-				<div class="relative w-full max-w-xl mx-auto max-xl:!w-4/5">
+				<div class="relative border !border-white rounded-lg w-full max-w-xl mx-auto max-xl:!w-4/5">
 					<input
 						v-model="searchQuery"
 						type="text"
