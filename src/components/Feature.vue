@@ -86,7 +86,7 @@ onMounted(() => {
 });
 </script>
 <template>
-  <div class="container overflow-x-hidden">
+  <div id="features" class="container overflow-x-hidden">
     <h2
       class="text-5xl text-center mt-27.5 max-md:mt-15 max-md:mb-7 mb-13 font-bold text-primary max-md:text-[26px]"
     >

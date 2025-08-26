@@ -36,7 +36,7 @@ const routes = [
       name: "report",
       component: () => import("@/pages/report.vue")
    },
-    {
+   {
       path: "/help",
       name: "help",
       component: () => import("@/pages/help.vue")
@@ -51,6 +51,18 @@ const routes = [
 const router = createRouter({
    history: createWebHistory(),
    routes,
+   scrollBehavior(to, from, savedPosition) {
+      if (savedPosition) {
+         return savedPosition;
+      } else if (to.hash) {
+         return {
+            el: to.hash,
+            behavior: "smooth", // smooth scroll
+         };
+      } else {
+         return { top: 0 };
+      }
+   },
 });
 
 export default router;

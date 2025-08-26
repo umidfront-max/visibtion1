@@ -24,8 +24,8 @@ const cards = [
   },
   {
     name: "Pro",
-    price: "$3.99",
-    year: "$39",
+    price: "$3,99",
+    year: "$39,00",
     title: "All the basics for individuals and professionals",
     slugs: [
       "5 Bio link",
@@ -38,8 +38,8 @@ const cards = [
   },
   {
     name: " Premium",
-    price: "$7.99",
-    year: "$79",
+    price: "$7,99",
+    year: "$79,00",
     title: "All the basics for individuals and professionals",
     slugs: [
       "10 Bio link",
@@ -59,7 +59,7 @@ onMounted(() => {
 });
 </script>
 <template>
-  <div class="container overflow-x-hidden">
+  <div id="pricing" class="container overflow-x-hidden">
     <h2
       class="font-bold mb-12.5 text-primary text-center text-5xl mt-27 max-sm:text-[26px] max-md:mt-15 max-md:mb-5"
     >
@@ -114,7 +114,7 @@ onMounted(() => {
     <div
       class="mt-7.5 w-full grid grid-cols-3 gap-7.5 items-center mb-15 max-md:grid-cols-1 max-md:mb-7.5"
     >
-      <PriceCard :data="item" v-for="(item, i) in cards" :year="isOn" />
+      <PriceCard :data="item" v-for="(item, i) in cards" :key="i" :year="isOn" />
     </div>
   </div>
 </template>

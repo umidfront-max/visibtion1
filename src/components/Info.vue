@@ -29,14 +29,9 @@ onMounted(() => {
 <template>
   <div class="h-[670px] max-sm:h-222 w-full relative info overflow-x-hidden">
     <div class="container">
-      <!-- <div class="pt-2 max-md:pt-5.5">
-        <div class="md:hidden max-md:flex relative z-20">
-          <HamburgerMenu v-model="isOpen" />
-        </div>
-        <Navbar :open="isOpen" @close="closeNav" />
-      </div> -->
+      <!-- DIV (o‘ngdan chapga 30px) -->
       <div
-        class="max-w-170 pt-39 max-xl:pt-28 max-md:text-center max-xl:max-w-120 relative z-2"
+        class="max-w-170 pt-39 max-xl:pt-28 max-md:text-center max-xl:max-w-120 relative z-2 animate-div"
       >
         <h1
           class="font-bold text-5xl uppercase text-primary max-xl:text-4xl max-lg:text-[28px]"
@@ -45,7 +40,6 @@ onMounted(() => {
           <span>
             <a :href="link" class="" :key="restartKey">
               <span class="inline-block">
-
                 <template v-for="(letter, index) in firstText" :key="'f' + index">
                   <span
                     class="inline-block animate-letter text-fiolet"
@@ -55,7 +49,6 @@ onMounted(() => {
                   </span>
                 </template>
               </span>
-              
               <span class="text-fiolet inline-block ml-2">
                 <template
                   v-for="(letter, index) in secondText"
@@ -82,11 +75,44 @@ onMounted(() => {
         </p>
         <StartFree class="mt-13.5 max-md:mt-6" />
       </div>
+
+      <!-- IMG (chapdan o‘ngga 30px) -->
       <img
         src="../assets/img/phone-gr.svg"
-        class="absolute right-0 bottom-0 max-sm:object-cover h-148 w-auto object-contain max-lg:h-108 z-0"
+        class="absolute right-0 bottom-0 max-sm:object-cover h-148 w-auto object-contain max-lg:h-108 z-0 animate-img"
       />
     </div>
   </div>
 </template>
-<style></style>
+
+<style scoped>
+/* Div animatsiyasi (o‘ngdan chapga 30px + opacity) */
+@keyframes divEnter {
+  0% {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.animate-div {
+  animation: divEnter 0.8s ease-out forwards;
+}
+
+/* Img animatsiyasi (chapdan o‘ngga 30px + opacity) */
+@keyframes imgEnter {
+  0% {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.animate-img {
+  animation: imgEnter 0.8s ease-out forwards;
+}
+</style>

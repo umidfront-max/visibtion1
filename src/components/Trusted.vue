@@ -6,11 +6,10 @@ import { ref, onMounted } from "vue";
 const check = ref(true);
 const firstText = "5000+".split("");
 
-
+// Matn uchun interval animatsiyasi
 const animationDuration = 60;
 const restartDelay = 4000;
 const restartKey = ref(0);
-const isOpen = ref(false);
 
 onMounted(() => {
   const totalLetters = firstText.length;
@@ -18,7 +17,30 @@ onMounted(() => {
     restartKey.value++;
   }, totalLetters * animationDuration + restartDelay);
 });
+
+// StartFree animatsiyasi uchun
+const startFreeVisible = ref(false);
+const startFreeRef = ref(null);
+
+onMounted(() => {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          startFreeVisible.value = true;   // faqat ko‘ringanda ishlaydi
+          observer.unobserve(entry.target); // bir marta ishlasin
+        }
+      });
+    },
+    { threshold: 0.3 } // elementning 30% qismi ko‘ringanda
+  );
+
+  if (startFreeRef.value) {
+    observer.observe(startFreeRef.value);
+  }
+});
 </script>
+
 <template>
   <div class="container max-sm:!px-0">
     <div class="info rounded-4xl mt-17 max-md:mt-10">
@@ -29,7 +51,6 @@ onMounted(() => {
           class="text-5xl font-bold text-primary text-center max-md:text-3xl max-xl:text-4xl max-sm:text-[26px]"
         >
           Trusted by
-
           <span>
             <span class="" :key="restartKey">
               <template v-for="(letter, index) in firstText" :key="'f' + index">
@@ -40,31 +61,37 @@ onMounted(() => {
                   {{ letter }}
                 </span>
               </template>
-
-              
             </span>
           </span>
           creators, businesses, and everyday people alike.
         </h2>
+
         <label
           class="flex items-center gap-4 mt-7 cursor-pointer max-md:mt-4 max-sm:gap-2.5"
         >
-          <!-- <input
-            v-model="check"
-            type="checkbox"
-            class="appearance-none h-6 w-6 border-2 rounded max-sm:w-4 max-sm:h-4"
-          /> -->
           <span
             class="flex w-6 h-6 max-sm:w-4 max-sm:h-4 border-2 border-fiolet rounded items-center justify-center transition duration-300"
             :class="check && 'bg-fiolet'"
           >
             <CheckIcon v-if="check" class="text-[10px] max-sm:text-[8px]" />
           </span>
-          <span class="text-2xl text-primary max-md:text-xl max-sm:text-sm"
-            >Join them and start your own journey.</span
-          >
+          <span class="text-2xl text-primary max-md:text-xl max-sm:text-sm">
+            Join them and start your own journey.
+          </span>
         </label>
-        <StartFree class="mt-8 max-md:mt-6" />
+
+        <!-- StartFree animatsiya bilan -->
+        <div
+          ref="startFreeRef"
+          :class="[
+            'mt-8 max-md:mt-6 transition-all duration-700 ease-out',
+            startFreeVisible
+              ? 'opacity-100 translate-y-0'
+              : 'opacity-0 translate-y-10'
+          ]"
+        >
+          <StartFree />
+        </div>
       </div>
     </div>
   </div>

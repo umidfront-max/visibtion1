@@ -1,58 +1,53 @@
 <script setup>
-import { defineEmits, watch } from "vue";
+import { ref, watch } from "vue";
 import HamburgerMenu from "./MenuBar.vue";
-
-import { ref } from "vue";
 import { useRouter } from "vue-router";
+
 const router = useRouter();
+const isOpen = ref(false);
+
 function closeNav() {
 	isOpen.value = false;
 }
 
-const isOpen = ref(false);
-
-const link =
-	"https://www.figma.com/design/N6Yzn7QkUmAMDExor5VSUU/visitbio-full-design?node-id=2073-3&t=lTeU8QKKl1lr2HGl-0";
-
 const links = [
-	{
-		name: "Features",
-		href: link,
-	},
-	{
-		name: "Faq",
-		href: link,
-	},
-	{
-		name: "Pricing",
-		href: link,
-	},
-	{
-		name: "How it Works",
-		href: link,
-	},
+	{ name: "Features", href: "#features" },
+	{ name: "Faq", href: "#faq" },
+	{ name: "Pricing", href: "#pricing" },
+	{ name: "How it Works", href: "#how-it-works" },
 ];
 
-const goLink = (link) => {
-	window.open(link, "_blank");
+const goLink = async (href) => {
+	if (href.startsWith("#")) {
+		if (router.currentRoute.value.path === "/") {
+			// Agar allaqachon asosiy sahifada bo‘lsa
+			const el = document.querySelector(href);
+			if (el) {
+				el.scrollIntoView({ behavior: "smooth" });
+			}
+		} else {
+			// Agar boshqa sahifada bo‘lsa
+			await router.push({ path: "/", hash: href });
+		}
+	} else {
+		// tashqi link
+		window.open(href, "_blank");
+	}
 
 	if (window.innerWidth <= 768) {
 		closeNav();
 	}
 };
 
-// Watch for menu state changes to handle body overflow
+// Body scroll bloklash
 watch(
 	() => isOpen.value,
 	(val) => {
-		if (val) {
-			document.body.style.overflow = "hidden";
-		} else {
-			document.body.style.overflow = "";
-		}
+		document.body.style.overflow = val ? "hidden" : "";
 	}
 );
 </script>
+
 <template>
 	<div
 		class="w-full rounded navbar transition-transform duration-300 ease-in-out flex items-center justify-between pl-8 pr-2.5 h-17.5 max-lg:pl-2.5 max-lg:h-15 max-md:fixed left-0 top-0 max-md:py-10"
@@ -85,7 +80,7 @@ watch(
 				<span> Login </span>
 			</button>
 			<button
-				class="h-13 px-8.5 text-white font-bold text-lg flex items-center rounded bg-green-200 start nav-btn"
+				class="h-13 px-8.5 text-white font-bold text-lg flex items-center rounded bg-green-600 start nav-btn"
 			>
 				<span> Start for free </span>
 			</button>
