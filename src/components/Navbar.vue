@@ -118,12 +118,13 @@ watch(
 
 				<div class="flex flex-col gap-4 w-full max-sm:w-full">
 					<button
+						@click="router.push('/login')"
 						class="h-13 nav-btn px-8.5 text-white font-bold text-lg flex items-center justify-center rounded bg-gray-800 login"
 					>
 						<span> Login </span>
 					</button>
 					<button
-						class="h-13 px-8.5 text-white font-bold text-lg flex items-center justify-center rounded bg-green-200 start nav-btn"
+						class="h-13 px-8.5 text-white font-bold text-lg flex items-center justify-center rounded bg-green-500 start nav-btn"
 					>
 						<span> Start for free </span>
 					</button>
