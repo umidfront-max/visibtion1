@@ -197,7 +197,7 @@
 
 <script setup>
 import { ref } from "vue";
-import { useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import Gmail from "@/components/icons/gmail.vue";
 import Password from "@/components/icons/password.vue";
 import LinkedIn from "@/components/icons/LinkedIn.vue";
@@ -207,8 +207,9 @@ import Loader from "@/components/Loader.vue";
 import LayoutHeader from "../components/LayoutHeader.vue";
 
 const router = useRouter();
+const route = useRoute();
 const email = ref("");
-const username = ref("");
+const username = ref(route.query.username || "");
 const password = ref("");
 const showPassword = ref(false);
 const loading = ref(false);

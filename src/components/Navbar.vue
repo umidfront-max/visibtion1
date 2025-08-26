@@ -80,6 +80,7 @@ watch(
 				<span> Login </span>
 			</button>
 			<button
+				@click="router.push('/signup')"
 				class="h-13 px-8.5 text-white font-bold text-lg flex items-center rounded bg-green-600 start nav-btn"
 			>
 				<span> Start for free </span>
