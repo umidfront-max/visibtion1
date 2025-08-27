@@ -1,5 +1,5 @@
 <template>
-	<div class="min-h-screen gradient-bg flex justify-end">
+	<div class="min-h-screen gradient-bg flex max-lg:flex-col justify-end">
 		<div class="text-white p-8 lg:p-10">
 			<router-link
 				to="/"
@@ -91,8 +91,8 @@
 		</div>
 
 		<!-- Right Panel -->
-		<div class="bg-gray-50 p-8 lg:p-10 m max-w-[700px] w-full">
-			<div class="pr-40 w-full">
+		<div class="bg-gray-50 p-8 lg:p-10 m max-w-[700px] max-lg:max-w-full w-full">
+			<div class="pr-40 w-full max-sm:pr-0">
 				<!-- Contact Information -->
 				<h3 class="text-lg font-semibold text-black/70 mb-4">
 					Contact information
