@@ -24,8 +24,8 @@ const cards = [
   },
   {
     name: "Pro",
-    price: "$3,99",
-    year: "$39,00",
+    price: "$3.99",
+    year: "$39.00",
     title: "All the basics for individuals and professionals",
     slugs: [
       "5 Bio link",
@@ -38,8 +38,8 @@ const cards = [
   },
   {
     name: " Premium",
-    price: "$7,99",
-    year: "$79,00",
+    price: "$7.99",
+    year: "$79.00",
     title: "All the basics for individuals and professionals",
     slugs: [
       "10 Bio link",
