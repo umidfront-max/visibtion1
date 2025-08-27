@@ -37,6 +37,11 @@ const routes = [
       component: () => import("@/pages/report.vue")
    },
    {
+      path: "/dashboard",
+      name: "dashboard",
+      component: () => import("@/pages/dashboard.vue")
+   },
+   {
       path: "/checkout",
       name: "checkout",
       component: () => import("@/pages/checkout.vue")
@@ -45,6 +50,16 @@ const routes = [
       path: "/help",
       name: "help",
       component: () => import("@/pages/help.vue")
+   },
+   {
+      path: "/select-plan",
+      name: "select-plan",
+      component: () => import("@/pages/selectPlan.vue")
+   },
+   {
+      path: "/signup-next-step",
+      name: "signup-next-step",
+      component: () => import("@/pages/signupNextStep.vue")
    },
    {
       path: "/privacy-policy",

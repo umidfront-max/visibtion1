@@ -247,7 +247,7 @@ const handleSubmit = () => {
 		loading.value = true;
 		setTimeout(() => {
 			loading.value = false;
-			router.push("/login");
+			router.push("/select-plan?from=signup");
 		}, 1000);
 	}
 };
