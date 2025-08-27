@@ -60,7 +60,9 @@ const helpLinks = ref([
 				</h1>
 
 				<!-- Search input -->
-				<div class="relative border !border-white rounded-lg w-full max-w-xl mx-auto max-xl:!w-4/5">
+				<div
+					class="relative border !border-white rounded-lg w-full max-w-xl mx-auto max-xl:!w-4/5"
+				>
 					<input
 						v-model="searchQuery"
 						type="text"
@@ -98,7 +100,9 @@ const helpLinks = ref([
 
 		<!-- Help cards -->
 		<main class="container py-12">
-			<div class="grid gap-6 w-4/5 mx-auto max-md:my-6 max-sm:gap-4 max-md:w-full">
+			<div
+				class="grid gap-6 w-4/5 mx-auto max-md:my-6 max-sm:gap-4 max-md:w-full"
+			>
 				<router-link
 					:to="link.url"
 					v-for="(link, index) in helpLinks"
@@ -133,17 +137,14 @@ const helpLinks = ref([
 
 <style scoped>
 .hero-gradient {
-	background: linear-gradient(120deg, #06ab4f, #6f33de, #06ab4f, #6f33de);
-	background-size: 300% 300%;
-	animation: gradientShift 8s ease-in-out infinite alternate;
+	background: linear-gradient(120deg, #06ab4f, #6f33de, #06ab4f);
+	background-size: 200% 200%;
+	animation: gradientShift 12s ease-in-out infinite alternate;
 }
 
 @keyframes gradientShift {
 	0% {
 		background-position: 0% 50%;
-	}
-	50% {
-		background-position: 50% 50%;
 	}
 	100% {
 		background-position: 100% 50%;

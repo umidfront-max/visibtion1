@@ -22,7 +22,7 @@
 			<div class="my-10">
 				<h2 class="text-lg opacity-90 mb-3">Subscribe to Pro Plan</h2>
 				<div class="flex items-center">
-					<p class="text-5xl font-light">$7.00</p>
+					<p class="text-5xl font-light">${{ totalPrice.toFixed(2) }}</p>
 					<div>
 						<p class="text-base opacity-80 ml-2">per</p>
 						<p class="text-base opacity-80 ml-2">month</p>
@@ -33,12 +33,6 @@
 			<!-- Plan Details -->
 			<div class="">
 				<div class="flex gap-6">
-					<router-link
-						to="/"
-						class="!text-purple-600 flex gap-2 font-bold text-3xl"
-					>
-						<span> LOGO </span>
-					</router-link>
 					<div>
 						<div class="flex border-b border-white/30 pb-6">
 							<div class="flex-1 text-white">
@@ -51,31 +45,45 @@
 									Billed monthly
 								</div>
 							</div>
-							<div class="font-semibold">$7.00</div>
+							<div class="font-semibold">
+								${{ originalPrice.toFixed(2) }}
+							</div>
 						</div>
+
 						<!-- Subtotal -->
 						<div
 							class="flex justify-between items-center text-base font-semibold my-6"
 						>
 							<span>Subtotal</span>
-							<span>$7.00</span>
+							<span>${{ originalPrice.toFixed(2) }}</span>
 						</div>
+
 						<!-- Promo Code -->
-						<div class="mb-8">
+						<div class="mb-6 flex relative">
 							<input
 								v-model="promoCode"
 								type="text"
 								placeholder="Add promotion code"
 								class="w-full p-3 rounded-md !bg-white bg-opacity-90 text-gray-800 !placeholder-gray-500 border-0 focus:!outline-none focus:ring-6 focus:!ring-white/30 focus:!ring-opacity-50"
 							/>
+							<button
+								@click="applyPromo"
+								class="px-4 absolute right-0 py-3 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition"
+							>
+								Apply
+							</button>
 						</div>
+
+						<p v-if="promoMessage" class="text-red-300 text-sm mb-3">
+							{{ promoMessage }}
+						</p>
 
 						<!-- Total -->
 						<div
 							class="flex justify-between items-center font-semibold border-t border-white border-opacity-20 pt-5"
 						>
 							<span>Total due today</span>
-							<span>$7.00</span>
+							<span>${{ totalPrice.toFixed(2) }}</span>
 						</div>
 					</div>
 				</div>
@@ -115,7 +123,7 @@
 								<div
 									@click="paymentMethod = 'card'"
 									:class="[
-										'flex items-center  rounded-md cursor-pointer transition-all border-gray-200 hover:border-gray-300',
+										'flex items-center rounded-md cursor-pointer transition-all border-gray-200 hover:border-gray-300',
 									]"
 								>
 									<input
@@ -241,7 +249,7 @@
 							<div
 								@click="paymentMethod = 'bank'"
 								:class="[
-									'flex items-center  rounded-md cursor-pointer transition-all p-5 py-3 border-t border-gray-200 hover:border-gray-300',
+									'flex items-center rounded-md cursor-pointer transition-all p-5 py-3 border-t border-gray-200 hover:border-gray-300',
 								]"
 							>
 								<input
@@ -280,9 +288,10 @@
 				<!-- Pay Button -->
 				<button
 					@click="processPayment"
-					class="w-full bg-black/80 cursor-pointer text-white py-4 rounded-md font-semibold hover:bg-black/80 transition-colors mb-4"
+					class="w-full bg-black/80 flex justify-center  cursor-pointer text-white py-4 rounded-md font-semibold hover:bg-black/80 transition-colors mb-4"
 				>
-					Pay and subscribe
+					<span v-if="!loading"> Pay and subscribe</span>
+					<Loader v-else />
 				</button>
 
 				<!-- Terms -->
@@ -291,20 +300,6 @@
 					to<br />
 					the terms until you cancel.
 				</p>
-
-				<!-- Footer -->
-				<div
-					class="flex items-center justify-center space-x-4 text-xs text-gray-400"
-				>
-					<span
-						>Powered by
-						<strong class="text-gray-600">stripe</strong></span
-					>
-					<span>•</span>
-					<router-link to="/terms" class="hover:text-gray-600">Terms</router-link>
-					<span>•</span>
-					<router-link to="/privacy-policy" class="hover:text-gray-600">Privacy</router-link>
-				</div>
 			</div>
 		</div>
 	</div>
@@ -312,8 +307,14 @@
 
 <script setup>
 import { ref } from "vue";
+import Loader from "@/components/Loader.vue";
+import { useRouter } from "vue-router";
 
 const promoCode = ref("");
+const promoMessage = ref("");
+const originalPrice = ref(7.0);
+const totalPrice = ref(originalPrice.value);
+
 const email = ref("@gmail.com");
 const paymentMethod = ref("card");
 const cardNumber = ref("");
@@ -322,6 +323,17 @@ const cvc = ref("");
 const cardholderName = ref("");
 const country = ref("uz");
 const saveInfo = ref(false);
+const loading = ref(false);
+const router = useRouter()
+const applyPromo = () => {
+	if (promoCode.value === "333") {
+		totalPrice.value = originalPrice.value * 0.8; // 20% off
+		promoMessage.value = "Promo code applied! You got 20% off.";
+	} else {
+		totalPrice.value = originalPrice.value;
+		promoMessage.value = "This promo code does not exist.";
+	}
+};
 
 const formatCardNumber = (event) => {
 	let value = event.target.value.replace(/\s+/g, "").replace(/[^0-9]/gi, "");
@@ -359,13 +371,19 @@ const formatCVC = (event) => {
 };
 
 const processPayment = () => {
-	alert(
-		"Payment processing... (Demo)\n\n" +
-			`Card: ${cardNumber.value}\n` +
-			`Expiry: ${expiryDate.value}\n` +
-			`CVC: ${cvc.value}\n` +
-			`Name: ${cardholderName.value}`
-	);
+	loading.value = true;
+	setTimeout(() => {
+		loading.value = false;
+		router.push("/dashboard");
+	}, 1500);
+	// alert(
+	// 	"Payment processing... (Demo)\n\n" +
+	// 		`Card: ${cardNumber.value}\n` +
+	// 		`Expiry: ${expiryDate.value}\n` +
+	// 		`CVC: ${cvc.value}\n` +
+	// 		`Name: ${cardholderName.value}\n` +
+	// 		`Total: $${totalPrice.value.toFixed(2)}`
+	// );
 };
 </script>
 
